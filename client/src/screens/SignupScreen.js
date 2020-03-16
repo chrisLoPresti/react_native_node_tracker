@@ -2,21 +2,21 @@ import React, { useContext } from 'react';
 import AuthForm from '../components/AuthForm';
 import { Context as AuthContext } from '../context/AuthContext';
 
-const SignupScreen = () => {
-  const { signup } = useContext(AuthContext);
+const SignUpScreen = () => {
+  const { SignUp } = useContext(AuthContext);
   return (
     <AuthForm
       title='Sign up for Tracker'
-      type='Signup'
-      onSubmit={signup}
+      type='SignUp'
+      onSubmit={SignUp}
       linkText='Already have an account? Sign in now'
-      navLink='Signin'
+      navLink='SignIn'
     />
   );
 };
 
-SignupScreen.navigationOptions = {
+SignUpScreen.navigationOptions = {
   headerShown: false
 };
 
-export default SignupScreen;
+export default SignUpScreen;

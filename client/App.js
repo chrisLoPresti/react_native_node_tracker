@@ -5,23 +5,25 @@ import { createStackNavigator } from 'react-navigation-stack';
 import { Provider as AuthProvider } from './src/context/AuthContext';
 import {
   Account,
-  Signin,
-  Signup,
+  SignIn,
+  SignUp,
   TrackCreate,
   TrackDetail,
-  TrackList
+  TrackList,
+  ResolveAuth
 } from './src/screens';
 import { setNavigator } from './src/utils/nagivationRef';
 
 const switchNavigator = createSwitchNavigator({
+  ResolveAuth,
   loginFlow: createStackNavigator({
-    Signup: Signup,
-    Signin: Signin
+    SignIn,
+    SignUp
   }),
   mainFlow: createBottomTabNavigator({
     trackListFlow: createStackNavigator({
-      TrackList: TrackList,
-      TrackDetail: TrackDetail
+      TrackList,
+      TrackDetail
     }),
     TrackCreate: TrackCreate,
     Account: Account

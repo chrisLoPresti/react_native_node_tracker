@@ -2,11 +2,11 @@ import { AsyncStorage } from 'react-native';
 import createDataContext from './createDataContext';
 import authReducer from '../reducers/authReducer';
 import trackerApi from '../api/tracker';
-import { SIGN_UP, SIGN_IN } from '../actionTypes/authTypes';
+import { SIGN_UP, SIGN_IN, SIGN_OUT } from '../actionTypes/authTypes';
 import { navigate } from '../utils/nagivationRef';
 
-const automaticSignin = dispatch => async () => {
-  const token = AsyncStorage.getItem('token');
+const automaticSignIn = dispatch => async () => {
+  const token = await AsyncStorage.getItem('token');
   if (token) {
     dispatch({ type: SIGN_IN, payload: { token } });
     navigate('TrackList');
@@ -15,9 +15,9 @@ const automaticSignin = dispatch => async () => {
   }
 };
 
-const signup = dispatch => async ({ email, password, verifyPassword }) => {
+const SignUp = dispatch => async ({ email, password, verifyPassword }) => {
   try {
-    const response = await trackerApi.post('signup', {
+    const response = await trackerApi.post('SignUp', {
       email,
       password,
       verifyPassword
@@ -30,9 +30,9 @@ const signup = dispatch => async ({ email, password, verifyPassword }) => {
   }
 };
 
-const signin = dispatch => async ({ email, password }) => {
+const SignIn = dispatch => async ({ email, password }) => {
   try {
-    const response = await trackerApi.post('signin', {
+    const response = await trackerApi.post('SignIn', {
       email,
       password
     });
@@ -44,8 +44,14 @@ const signin = dispatch => async ({ email, password }) => {
   }
 };
 
+const SignOut = dispatch => async () => {
+  await AsyncStorage.removeItem('token');
+  dispatch({ type: SIGN_OUT });
+  navigate('loginFlow');
+};
+
 export const { Provider, Context } = createDataContext(
   authReducer,
-  { signup, signin, automaticSignin },
+  { SignUp, SignIn, automaticSignIn, SignOut },
   { token: null, error: { email: null, password: null, verifyPassword: null } }
 );

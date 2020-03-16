@@ -1,10 +1,10 @@
-import React, { useState, useContext, useEffect } from 'react';
+import React, { useState, useContext } from 'react';
 import { View, StyleSheet } from 'react-native';
 import { Text, Input, Button } from 'react-native-elements';
 import Spacer from '../components/Spacer';
 import { Context as AuthContext } from '../context/AuthContext';
 import NavLink from '../components/NavLink';
-import startCase from 'lodash/startCase';
+import _ from 'lodash';
 
 const AuthForm = ({
   type,
@@ -15,17 +15,11 @@ const AuthForm = ({
   navLinkParams
 }) => {
   const {
-    state: { error },
-    automaticSignin
+    state: { error }
   } = useContext(AuthContext);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [verifyPassword, setVerifyPassword] = useState('');
-
-  useEffect(() => {
-    automaticSignin();
-  }, []);
-
   return (
     <View style={styles.container}>
       <Spacer>
@@ -50,7 +44,7 @@ const AuthForm = ({
         onChangeText={setPassword}
       />
       {error.password && <Text style={styles.error}>{error.password}</Text>}
-      {type === 'Signup' && (
+      {type === 'SignUp' && (
         <>
           <Input
             secureTextEntry
@@ -69,7 +63,7 @@ const AuthForm = ({
       {error.generic && <Text style={styles.error}>{error.generic}</Text>}
       <Spacer>
         <Button
-          title={startCase(type)}
+          title={_.startCase(type)}
           onPress={() => onSubmit({ email, password, verifyPassword })}
         />
       </Spacer>

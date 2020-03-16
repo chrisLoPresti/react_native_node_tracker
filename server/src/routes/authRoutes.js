@@ -9,12 +9,12 @@ const User = mongoose.model('User');
 const jwtSignature = require('../config/keys').jwtSignature;
 //validation
 const validateLoginCredentials = require('../validation/login');
-const validateSignupCredentials = require('../validation/signup');
+const validateSignUpCredentials = require('../validation/SignUp');
 //auth token expiration
 const expiresIn = 3600000;
 
-router.post('/signup', async (req, res) => {
-  const { error, isValid } = validateSignupCredentials(req.body);
+router.post('/SignUp', async (req, res) => {
+  const { error, isValid } = validateSignUpCredentials(req.body);
 
   if (!isValid) {
     return res.status(400).json(error);
@@ -35,7 +35,7 @@ router.post('/signup', async (req, res) => {
   }
 });
 
-router.post('/signin', async (req, res) => {
+router.post('/SignIn', async (req, res) => {
   const { error, isValid } = validateLoginCredentials(req.body);
   if (!isValid) {
     return res.status(400).json(error);

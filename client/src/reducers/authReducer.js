@@ -1,17 +1,22 @@
-import { SIGN_UP, SIGN_IN } from '../actionTypes/authTypes';
+import { SIGN_UP, SIGN_IN, SIGN_OUT } from '../actionTypes/authTypes';
+
+const defaultError = { email: null, password: null, verifyPassword: null };
 
 export default (state, { type, payload }) => {
   switch (type) {
     case SIGN_UP: {
-      const {
-        error = { email: null, password: null, verifyPassword: null },
-        token
-      } = payload;
+      const { error = defaultError, token } = payload;
       return { error, token };
     }
     case SIGN_IN: {
-      const { token } = payload;
-      return { error: {}, token };
+      const { error = defaultError, token } = payload;
+      return { error, token };
+    }
+    case SIGN_OUT: {
+      return {
+        error: defaultError,
+        token: null
+      };
     }
     default:
       return state;
