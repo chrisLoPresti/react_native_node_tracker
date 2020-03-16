@@ -3,7 +3,8 @@ import {
   ADD_CURRENT_LOCATION,
   START_RECORDING,
   STOP_RECORDING,
-  SET_TRACKING_NAME
+  SET_TRACKING_NAME,
+  RESET
 } from '../actionTypes/locationTypes';
 
 export default (state, { type, payload }) => {
@@ -12,7 +13,6 @@ export default (state, { type, payload }) => {
       return { ...state, name: payload };
     }
     case ADD_LOCATION: {
-      console.log(payload);
       return { ...state, locations: [...state.locations, payload] };
     }
     case START_RECORDING: {
@@ -23,6 +23,9 @@ export default (state, { type, payload }) => {
     }
     case ADD_CURRENT_LOCATION: {
       return { ...state, currentLocation: payload };
+    }
+    case RESET: {
+      return payload;
     }
     default:
       return state;

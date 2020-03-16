@@ -5,8 +5,16 @@ import {
   ADD_CURRENT_LOCATION,
   START_RECORDING,
   STOP_RECORDING,
-  SET_TRACKING_NAME
+  SET_TRACKING_NAME,
+  RESET
 } from '../actionTypes/locationTypes';
+
+const initialState = {
+  name: '',
+  recording: false,
+  locations: [],
+  currentLocation: null
+};
 
 const startRecording = dispatch => () => {
   dispatch({ type: START_RECORDING });
@@ -21,12 +29,22 @@ const addLocation = dispatch => (currentLocation, recording) => {
   }
 };
 
+export const reset = dispatch => () => {
+  dispatch({ type: RESET, payload: initialState });
+};
+
 const changeName = dispatch => name => {
   dispatch({ type: SET_TRACKING_NAME, payload: name });
 };
 
 export const { Provider, Context } = createDataContext(
   locationReducer,
-  { changeName, startRecording, stopRecording, addLocation },
-  { name: '', recording: false, locations: [], currentLocation: null }
+  {
+    changeName,
+    startRecording,
+    stopRecording,
+    addLocation,
+    reset
+  },
+  initialState
 );

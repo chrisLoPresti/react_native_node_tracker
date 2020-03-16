@@ -1,5 +1,5 @@
-import '../utils/mockLocation';
-import { useState, useEffect } from 'react';
+// import '../utils/mockLocation';
+import { useState, useEffect, useContext } from 'react';
 import {
   Accuracy,
   requestPermissionsAsync,
