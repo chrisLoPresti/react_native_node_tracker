@@ -4,10 +4,10 @@ import { Text } from 'react-native-elements';
 import Spacer from '../components/Spacer';
 import { navigate } from '../utils/nagivationRef';
 
-const NavLink = ({ text, to, params }) => {
+const NavLink = ({ text, to, params, callback }) => {
   return (
     <View>
-      <TouchableOpacity onPress={() => navigate(to, params)}>
+      <TouchableOpacity onPress={() => navigate(to, params, callback)}>
         <Spacer>
           <Text style={styles.NavLink}>{text}</Text>
         </Spacer>

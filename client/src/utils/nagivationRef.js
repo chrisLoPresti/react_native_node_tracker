@@ -6,6 +6,9 @@ export const setNavigator = nav => {
   navigator = nav;
 };
 
-export const navigate = (routeName, params) => {
+export const navigate = (routeName, params, callback) => {
   navigator.dispatch(NavigationActions.navigate({ routeName, params }));
+  if (callback) {
+    callback();
+  }
 };

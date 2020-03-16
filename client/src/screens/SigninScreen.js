@@ -3,12 +3,12 @@ import AuthForm from '../components/AuthForm';
 import { Context as AuthContext } from '../context/AuthContext';
 
 const SignInScreen = () => {
-  const { SignIn } = useContext(AuthContext);
+  const { signIn } = useContext(AuthContext);
   return (
     <AuthForm
       title='Sign in to Tracker'
       type='SignIn'
-      onSubmit={SignIn}
+      onSubmit={signIn}
       linkText="Don't have an account? Sign up now"
       navLink='SignUp'
     />

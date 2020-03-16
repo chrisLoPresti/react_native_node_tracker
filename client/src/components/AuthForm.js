@@ -15,7 +15,8 @@ const AuthForm = ({
   navLinkParams
 }) => {
   const {
-    state: { error }
+    state: { error },
+    clearErrors
   } = useContext(AuthContext);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -67,7 +68,12 @@ const AuthForm = ({
           onPress={() => onSubmit({ email, password, verifyPassword })}
         />
       </Spacer>
-      <NavLink text={linkText} to={navLink} params={navLinkParams} />
+      <NavLink
+        text={linkText}
+        to={navLink}
+        params={navLinkParams}
+        callback={clearErrors}
+      />
     </View>
   );
 };
